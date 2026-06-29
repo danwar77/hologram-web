@@ -4,17 +4,19 @@ import {
   Bell,
   Boxes,
   Braces,
+  ChevronLeft,
+  ChevronRight,
   CircleDot,
   Cpu,
   Gauge,
   Globe2,
+  Images,
   Layers3,
   LineChart,
   Menu,
   Mic,
   MousePointer2,
   Network,
-  PanelsTopLeft,
   Radar,
   Search,
   Settings2,
@@ -27,11 +29,28 @@ import { useState } from "react";
 const navItems = ["Overview", "Analitica", "Sistemas", "Proyectos"];
 
 const railItems = [
-  { icon: PanelsTopLeft, label: "Panel" },
-  { icon: LineChart, label: "Metricas" },
-  { icon: Network, label: "Red" },
-  { icon: Boxes, label: "Recursos" },
-  { icon: Settings2, label: "Ajustes" },
+  { icon: Images, id: "galeria", label: "Galeria" },
+  { icon: LineChart, id: "metricas", label: "Metricas" },
+  { icon: Network, id: "red", label: "Red" },
+  { icon: Boxes, id: "recursos", label: "Recursos" },
+  { icon: Settings2, id: "ajustes", label: "Ajustes" },
+];
+
+const galleryItems = [
+  {
+    alt: "Render 3D de una escena de accion con explosion sobre un edificio",
+    description: "Composicion cinematica con fuego, azotea y profundidad nocturna.",
+    kicker: "Render 01",
+    src: "/gallery/die-hard-rooftop.png",
+    title: "Rooftop ignition",
+  },
+  {
+    alt: "Render 3D de retrato de personaje inspirado en cientifico futurista",
+    description: "Retrato de personaje 3D con modelado facial y look de laboratorio.",
+    kicker: "Render 02",
+    src: "/gallery/doc-brown-portrait.png",
+    title: "Temporal portrait",
+  },
 ];
 
 const metricTiles = [
@@ -125,8 +144,78 @@ function RadarGraph() {
   );
 }
 
+function GalleryProjection() {
+  const [activeImage, setActiveImage] = useState(0);
+  const item = galleryItems[activeImage];
+  const nextIndex = (activeImage + 1) % galleryItems.length;
+  const previousIndex = (activeImage - 1 + galleryItems.length) % galleryItems.length;
+
+  function showImage(index: number) {
+    setActiveImage(index);
+  }
+
+  function showPrevious() {
+    showImage(previousIndex);
+  }
+
+  function showNext() {
+    showImage(nextIndex);
+  }
+
+  return (
+    <section className="gallery-projection" aria-label="Galeria holografica">
+      <div className="gallery-beam" />
+
+      <div className="gallery-stage" key={item.src}>
+        <div className="gallery-ghost gallery-ghost-left">
+          <img src={galleryItems[previousIndex].src} alt="" aria-hidden="true" />
+        </div>
+        <figure className="gallery-frame">
+          <img src={item.src} alt={item.alt} width="1920" height="1080" />
+          <span className="gallery-scan" aria-hidden="true" />
+          <figcaption className="gallery-caption">
+            <span>{item.kicker}</span>
+            <strong>{item.title}</strong>
+            <p>{item.description}</p>
+          </figcaption>
+        </figure>
+        <div className="gallery-ghost gallery-ghost-right">
+          <img src={galleryItems[nextIndex].src} alt="" aria-hidden="true" />
+        </div>
+      </div>
+
+      <div className="gallery-controls" aria-label="Controles de galeria">
+        <button className="gallery-arrow" type="button" aria-label="Imagen anterior" onClick={showPrevious}>
+          <ChevronLeft size={22} />
+        </button>
+
+        <div className="gallery-thumbs">
+          {galleryItems.map((galleryItem, index) => (
+            <button
+              aria-label={`Mostrar ${galleryItem.title}`}
+              aria-pressed={activeImage === index}
+              className={activeImage === index ? "gallery-thumb active" : "gallery-thumb"}
+              key={galleryItem.src}
+              onClick={() => showImage(index)}
+              type="button"
+            >
+              <img src={galleryItem.src} alt="" aria-hidden="true" />
+              <span>{galleryItem.kicker}</span>
+            </button>
+          ))}
+        </div>
+
+        <button className="gallery-arrow" type="button" aria-label="Imagen siguiente" onClick={showNext}>
+          <ChevronRight size={22} />
+        </button>
+      </div>
+    </section>
+  );
+}
+
 export default function App() {
   const [activeNav, setActiveNav] = useState(navItems[0]);
+  const [activeRail, setActiveRail] = useState(() => (window.location.hash === "#galeria" ? "galeria" : "metricas"));
   const [activeWidget, setActiveWidget] = useState<WidgetId>("daily");
   const [paneStyle, setPaneStyle] = useState<CSSProperties>({
     "--tilt-x": "0deg",
@@ -167,6 +256,19 @@ export default function App() {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       activateWidget(id);
+    }
+  }
+
+  function setRailMode(id: string) {
+    setActiveRail(id);
+
+    if (id === "galeria") {
+      window.history.replaceState(null, "", "#galeria");
+      return;
+    }
+
+    if (window.location.hash) {
+      window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
     }
   }
 
@@ -213,8 +315,15 @@ export default function App() {
           <button className="rail-menu" type="button" aria-label="Menu">
             <Menu size={22} />
           </button>
-          {railItems.map(({ icon: Icon, label }, index) => (
-            <button className={index === 1 ? "rail-button active" : "rail-button"} key={label} type="button" aria-label={label}>
+          {railItems.map(({ icon: Icon, id, label }) => (
+            <button
+              aria-label={label}
+              aria-pressed={activeRail === id}
+              className={activeRail === id ? "rail-button active" : "rail-button"}
+              key={label}
+              onClick={() => setRailMode(id)}
+              type="button"
+            >
               <Icon size={22} />
               <span>{label}</span>
             </button>
@@ -225,17 +334,17 @@ export default function App() {
           <div className="viewport-frame">
             <div className="viewport-header">
               <div>
-                <span className="overline">Live interface</span>
-                <h1>Superficie holografica de datos</h1>
+                <span className="overline">{activeRail === "galeria" ? "Creative archive" : "Live interface"}</span>
+                <h1>{activeRail === "galeria" ? "Galeria holografica de renders" : "Superficie holografica de datos"}</h1>
               </div>
               <div className="status-cluster">
-                <span><CircleDot size={15} /> Online</span>
-                <span><Zap size={15} /> Low latency</span>
+                <span><CircleDot size={15} /> {activeRail === "galeria" ? "Gallery mode" : "Online"}</span>
+                <span><Zap size={15} /> {activeRail === "galeria" ? "Projection sync" : "Low latency"}</span>
               </div>
             </div>
 
             <div
-              className="hologram-pane"
+              className={activeRail === "galeria" ? "hologram-pane gallery-mode" : "hologram-pane"}
               onPointerLeave={resetPaneTilt}
               onPointerMove={handlePanePointerMove}
               style={paneStyle}
@@ -247,108 +356,114 @@ export default function App() {
               <div className="pane-touch touch-a" />
               <div className="pane-touch touch-b" />
 
-              <article
-                aria-pressed={activeWidget === "daily"}
-                className={activeWidget === "daily" ? "glass-widget daily-widget active" : "glass-widget daily-widget"}
-                onClick={() => activateWidget("daily")}
-                onKeyDown={(event) => activateWidgetWithKeyboard(event, "daily")}
-                role="button"
-                tabIndex={0}
-              >
-                <div className="widget-title">
-                  <span>Daily Signups</span>
-                  <small>Updated 3 min ago</small>
-                </div>
-                <TrendChart />
-              </article>
+              {activeRail === "galeria" ? (
+                <GalleryProjection />
+              ) : (
+                <>
+                  <article
+                    aria-pressed={activeWidget === "daily"}
+                    className={activeWidget === "daily" ? "glass-widget daily-widget active" : "glass-widget daily-widget"}
+                    onClick={() => activateWidget("daily")}
+                    onKeyDown={(event) => activateWidgetWithKeyboard(event, "daily")}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <div className="widget-title">
+                      <span>Daily Signups</span>
+                      <small>Updated 3 min ago</small>
+                    </div>
+                    <TrendChart />
+                  </article>
 
-              <article
-                aria-pressed={activeWidget === "sales"}
-                className={activeWidget === "sales" ? "glass-widget sales-widget active" : "glass-widget sales-widget"}
-                onClick={() => activateWidget("sales")}
-                onKeyDown={(event) => activateWidgetWithKeyboard(event, "sales")}
-                role="button"
-                tabIndex={0}
-              >
-                <div className="widget-title">
-                  <span>Monthly Sales</span>
-                  <small>May sales 73.2M</small>
-                </div>
-                <AreaChart />
-              </article>
+                  <article
+                    aria-pressed={activeWidget === "sales"}
+                    className={activeWidget === "sales" ? "glass-widget sales-widget active" : "glass-widget sales-widget"}
+                    onClick={() => activateWidget("sales")}
+                    onKeyDown={(event) => activateWidgetWithKeyboard(event, "sales")}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <div className="widget-title">
+                      <span>Monthly Sales</span>
+                      <small>May sales 73.2M</small>
+                    </div>
+                    <AreaChart />
+                  </article>
 
-              <article
-                aria-pressed={activeWidget === "conversion"}
-                className={activeWidget === "conversion" ? "glass-widget conversion-widget active" : "glass-widget conversion-widget"}
-                onClick={() => activateWidget("conversion")}
-                onKeyDown={(event) => activateWidgetWithKeyboard(event, "conversion")}
-                role="button"
-                tabIndex={0}
-              >
-                <RingGauge value="234deg" label="65%" className="large" />
-                <span>Gross profit margin</span>
-              </article>
+                  <article
+                    aria-pressed={activeWidget === "conversion"}
+                    className={activeWidget === "conversion" ? "glass-widget conversion-widget active" : "glass-widget conversion-widget"}
+                    onClick={() => activateWidget("conversion")}
+                    onKeyDown={(event) => activateWidgetWithKeyboard(event, "conversion")}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <RingGauge value="234deg" label="65%" className="large" />
+                    <span>Gross profit margin</span>
+                  </article>
 
-              <article
-                aria-pressed={activeWidget === "retention"}
-                className={activeWidget === "retention" ? "glass-widget retention-widget active" : "glass-widget retention-widget"}
-                onClick={() => activateWidget("retention")}
-                onKeyDown={(event) => activateWidgetWithKeyboard(event, "retention")}
-                role="button"
-                tabIndex={0}
-              >
-                <RingGauge value="133deg" label="37%" />
-                <span>Operating margin</span>
-              </article>
+                  <article
+                    aria-pressed={activeWidget === "retention"}
+                    className={activeWidget === "retention" ? "glass-widget retention-widget active" : "glass-widget retention-widget"}
+                    onClick={() => activateWidget("retention")}
+                    onKeyDown={(event) => activateWidgetWithKeyboard(event, "retention")}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <RingGauge value="133deg" label="37%" />
+                    <span>Operating margin</span>
+                  </article>
 
-              <article
-                aria-pressed={activeWidget === "bars"}
-                className={activeWidget === "bars" ? "glass-widget bars-widget active" : "glass-widget bars-widget"}
-                onClick={() => activateWidget("bars")}
-                onKeyDown={(event) => activateWidgetWithKeyboard(event, "bars")}
-                role="button"
-                tabIndex={0}
-              >
-                <div className="widget-title">
-                  <span>Profit and loss summary</span>
-                  <small>Last 24 hours</small>
-                </div>
-                <MiniBars />
-              </article>
+                  <article
+                    aria-pressed={activeWidget === "bars"}
+                    className={activeWidget === "bars" ? "glass-widget bars-widget active" : "glass-widget bars-widget"}
+                    onClick={() => activateWidget("bars")}
+                    onKeyDown={(event) => activateWidgetWithKeyboard(event, "bars")}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <div className="widget-title">
+                      <span>Profit and loss summary</span>
+                      <small>Last 24 hours</small>
+                    </div>
+                    <MiniBars />
+                  </article>
 
-              <article
-                aria-pressed={activeWidget === "map"}
-                className={activeWidget === "map" ? "glass-widget map-widget active" : "glass-widget map-widget"}
-                onClick={() => activateWidget("map")}
-                onKeyDown={(event) => activateWidgetWithKeyboard(event, "map")}
-                role="button"
-                tabIndex={0}
-              >
-                <div className="widget-title">
-                  <span>Global activity</span>
-                  <small>Nodes by product</small>
-                </div>
-                <WorldMap />
-              </article>
+                  <article
+                    aria-pressed={activeWidget === "map"}
+                    className={activeWidget === "map" ? "glass-widget map-widget active" : "glass-widget map-widget"}
+                    onClick={() => activateWidget("map")}
+                    onKeyDown={(event) => activateWidgetWithKeyboard(event, "map")}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <div className="widget-title">
+                      <span>Global activity</span>
+                      <small>Nodes by product</small>
+                    </div>
+                    <WorldMap />
+                  </article>
 
-              <article
-                aria-pressed={activeWidget === "radar"}
-                className={activeWidget === "radar" ? "glass-widget radar-widget active" : "glass-widget radar-widget"}
-                onClick={() => activateWidget("radar")}
-                onKeyDown={(event) => activateWidgetWithKeyboard(event, "radar")}
-                role="button"
-                tabIndex={0}
-              >
-                <div className="widget-title">
-                  <span>System vector</span>
-                </div>
-                <RadarGraph />
-              </article>
+                  <article
+                    aria-pressed={activeWidget === "radar"}
+                    className={activeWidget === "radar" ? "glass-widget radar-widget active" : "glass-widget radar-widget"}
+                    onClick={() => activateWidget("radar")}
+                    onKeyDown={(event) => activateWidgetWithKeyboard(event, "radar")}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <div className="widget-title">
+                      <span>System vector</span>
+                    </div>
+                    <RadarGraph />
+                  </article>
 
-              <div className="pane-readout" aria-live="polite">
-                <span>{widgetDetails[activeWidget][0]}</span>
-                <strong>{widgetDetails[activeWidget][1]}</strong>
-              </div>
+                  <div className="pane-readout" aria-live="polite">
+                    <span>{widgetDetails[activeWidget][0]}</span>
+                    <strong>{widgetDetails[activeWidget][1]}</strong>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
