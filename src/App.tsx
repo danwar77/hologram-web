@@ -7,7 +7,6 @@ import {
   ChevronLeft,
   ChevronRight,
   CircleDot,
-  Cpu,
   Gauge,
   Globe2,
   Images,
@@ -78,6 +77,29 @@ const widgetDetails = {
 };
 
 type WidgetId = keyof typeof widgetDetails;
+
+function DanwarMark() {
+  return (
+    <svg className="brand-mark" viewBox="0 0 64 64" role="img" aria-label="Danwar77 hologram mark">
+      <defs>
+        <linearGradient id="markCore" x1="13" x2="50" y1="10" y2="55" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#f8fdff" />
+          <stop offset="0.5" stopColor="#73e4ff" />
+          <stop offset="1" stopColor="#1b8dff" />
+        </linearGradient>
+        <linearGradient id="markShadow" x1="16" x2="51" y1="42" y2="22" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#0e314b" stopOpacity="0.15" />
+          <stop offset="1" stopColor="#dff8ff" stopOpacity="0.52" />
+        </linearGradient>
+      </defs>
+      <circle className="brand-mark-orbit" cx="32" cy="32" r="27" />
+      <path className="brand-mark-panel" d="M15 37h11v7h16v-5h-9V24H20v-7h27v26h-9v7h14" />
+      <path className="brand-mark-core" d="M22 16h27v14l-7 3V23H22ZM25 25h21v24H25Zm8 7v10h8V32Z" />
+      <path className="brand-mark-shadow" d="M15 37h11v7h16v-5h10l-4 7H28v-7H13Z" />
+      <circle className="brand-mark-dot" cx="52" cy="20" r="4.5" />
+    </svg>
+  );
+}
 
 function TrendChart({ compact = false }: { compact?: boolean }) {
   return (
@@ -280,8 +302,8 @@ export default function App() {
 
       <header className="hud-topbar">
         <a className="brand-core" href="#top" aria-label="Holographic interface home">
-          <Cpu size={28} />
-          <span>Hologram OS</span>
+          <DanwarMark />
+          <span>DANWAR77</span>
         </a>
 
         <nav className="hud-tabs" aria-label="Navegacion principal">
