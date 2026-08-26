@@ -40,14 +40,14 @@ const galleryItems = [
     alt: "Visualización 3D con Blender para marca premium",
     description: "Escenas y productos 3D diseñados para comunicar valor antes de leer una línea.",
     kicker: "Blender 3D",
-    src: "/gallery/die-hard-rooftop.png",
+    src: `${import.meta.env.BASE_URL}gallery/die-hard-rooftop.png`,
     title: "Visual premium 3D",
   },
   {
     alt: "App Flutter con inteligencia artificial integrada",
     description: "Aplicaciones móviles inteligentes con IA: asistentes, automatización y análisis.",
     kicker: "Flutter + IA",
-    src: "/gallery/doc-brown-portrait.png",
+    src: `${import.meta.env.BASE_URL}gallery/doc-brown-portrait.png`,
     title: "Apps inteligentes",
   },
 ];
