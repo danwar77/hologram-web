@@ -357,7 +357,7 @@ export default function App() {
             <div className="viewport-header">
               <div>
                 <span className="overline">{activeRail === "galeria" ? "Portfolio creativo" : "Agencia creativa"}</span>
-                <h1>{activeRail === "galeria" ? "Proyectos Danwar Design" : "IA Engineer + Diseño digital"}</h1>
+                <h1>{activeRail === "galeria" ? "Proyectos Danwar77 Design" : "IA Engineer + Diseño digital"}</h1>
               </div>
               <div className="status-cluster">
                 <span><CircleDot size={15} /> {activeRail === "galeria" ? "Modo portfolio" : "Activo"}</span>
