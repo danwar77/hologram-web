@@ -893,6 +893,9 @@ p {
   filter: saturate(0.98) contrast(1.08) brightness(0.94);
   transform: scale(1.035);
   animation: galleryImageDrift 9s ease-in-out infinite;
+  pointer-events: auto;
+  cursor: pointer;
+  user-select: none;
 }
 
 .gallery-scan {

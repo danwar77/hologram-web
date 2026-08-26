@@ -287,7 +287,6 @@ function GalleryProjection() {
             width="1920" 
             height="1080" 
             onClick={openModal}
-            style={{ cursor: 'pointer' }}
           />
           <span className="gallery-scan" aria-hidden="true" />
           <figcaption className="gallery-caption">
