@@ -1,6 +1,8 @@
-# Hologram Web
+# Danwar Design | Dashboard Holográfico
 
-Dashboard holográfico interactivo con efectos glassmorphic, visualizaciones de datos y galería de proyecciones 3D.
+Dashboard holográfico interactivo con efectos glassmorphic, visualizaciones de datos y galería de proyectos para **Danwar Design** - IA Engineer + Agencia Creativa.
+
+Presenta servicios de aplicaciones con IA para Flutter, diseño 3D con Blender, sitios web modernos y marca digital completa.
 
 ## 🚀 Ejecutar
 
@@ -20,6 +22,13 @@ npm run preview
 
 ## ✨ Características
 
+### Presentación de Servicios Danwar Design
+- **IA Engineering**: Aplicaciones Flutter con inteligencia artificial integrada
+- **Blender 3D**: Visualizaciones premium y mundos 3D para marcas
+- **Web Moderna**: Sitios rápidos, limpios y persuasivos
+- **Marca Digital**: Presencia completa lista para crecer
+- **Contenido Bilingüe**: ES/EN desde la base
+
 ### Interfaz Glassmorphic
 - Efectos de cristal esmerilado con blur, transparencias y gradientes holográficos
 - Animaciones de tilt 3D reactivas al movimiento del cursor
@@ -27,25 +36,25 @@ npm run preview
 - Scanlines, noise layer y light sweeps para efecto futurista
 
 ### Widgets Interactivos
-- **Daily Signups**: Gráfica de tendencia con métricas de registro diario
-- **Monthly Sales**: Gráfica de área con volumen de ventas mensual
-- **Profit Summary**: Mini barras con resumen de ganancias de 24 horas
-- **Ring Gauges**: Indicadores circulares de conversión y márgenes
-- **World Map**: Mapa de actividad global con nodos sincronizados
-- **Radar Graph**: Gráfica hexagonal de vectores del sistema
+- **Proyectos Flutter**: Apps con IA integrada en desarrollo activo
+- **Stack Técnico**: Flutter, Blender, IA, React trabajando juntos
+- **Servicios Core**: 4 pilares creativos y técnicos de la agencia
+- **Ring Gauges**: Indicadores de crecimiento de marca y presencia digital
+- **Alcance Global**: Contenido bilingüe ES/EN para audiencia internacional
+- **Sistema Creativo**: IA, Flutter, 3D y Web en un solo ecosistema
 
-### Galería de Proyecciones
-- Carrusel holográfico con imágenes renderizadas en 3D
+### Galería de Proyectos
+- Portfolio holográfico con proyectos de Blender 3D y Flutter + IA
 - Navegación con controles prev/next y thumbnails
 - Efectos de proyección con ghosting lateral
-- Animaciones de escaneo y captions descriptivos
+- Animaciones de escaneo y captions descriptivos de servicios
 
 ### Navegación y UI
-- Top bar con marca personalizada (Danwar77) y navegación por tabs
-- Rail lateral con 5 modos: Galería, Métricas, Red, Recursos, Ajustes
-- Paneles flotantes con insights en tiempo real
-- Metric strip con tiles de estadísticas principales
-- Grid inferior con paneles de rendimiento, estado de módulos y acciones rápidas
+- Top bar con marca Danwar77 y navegación por tabs (Servicios, Proceso, Trabajo, Contacto)
+- Rail lateral con 5 modos: Portfolio, Proyectos, Servicios, Stack, Contacto
+- Paneles flotantes con insights de creatividad, técnica e inteligencia
+- Metric strip con tiles de servicios core y stack técnico
+- Grid inferior con paneles de servicios IA/Flutter/3D/Web, tecnologías activas y contacto
 
 ### Visualizaciones de Datos
 - Trend charts con líneas múltiples y fills

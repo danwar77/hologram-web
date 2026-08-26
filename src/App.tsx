@@ -25,55 +25,55 @@ import {
 import type { CSSProperties, KeyboardEvent, PointerEvent } from "react";
 import { useState } from "react";
 
-const navItems = ["Overview", "Analitica", "Sistemas", "Proyectos"];
+const navItems = ["Servicios", "Proceso", "Trabajo", "Contacto"];
 
 const railItems = [
-  { icon: Images, id: "galeria", label: "Galeria" },
-  { icon: LineChart, id: "metricas", label: "Metricas" },
-  { icon: Network, id: "red", label: "Red" },
-  { icon: Boxes, id: "recursos", label: "Recursos" },
-  { icon: Settings2, id: "ajustes", label: "Ajustes" },
+  { icon: Images, id: "galeria", label: "Portfolio" },
+  { icon: LineChart, id: "metricas", label: "Proyectos" },
+  { icon: Network, id: "red", label: "Servicios" },
+  { icon: Boxes, id: "recursos", label: "Stack" },
+  { icon: Settings2, id: "ajustes", label: "Contacto" },
 ];
 
 const galleryItems = [
   {
-    alt: "Render 3D de una escena de accion con explosion sobre un edificio",
-    description: "Composicion cinematica con fuego, azotea y profundidad nocturna.",
-    kicker: "Render 01",
+    alt: "Visualización 3D con Blender para marca premium",
+    description: "Escenas y productos 3D diseñados para comunicar valor antes de leer una línea.",
+    kicker: "Blender 3D",
     src: "/gallery/die-hard-rooftop.png",
-    title: "Rooftop ignition",
+    title: "Visual premium 3D",
   },
   {
-    alt: "Render 3D de retrato de personaje inspirado en cientifico futurista",
-    description: "Retrato de personaje 3D con modelado facial y look de laboratorio.",
-    kicker: "Render 02",
+    alt: "App Flutter con inteligencia artificial integrada",
+    description: "Aplicaciones móviles inteligentes con IA: asistentes, automatización y análisis.",
+    kicker: "Flutter + IA",
     src: "/gallery/doc-brown-portrait.png",
-    title: "Temporal portrait",
+    title: "Apps inteligentes",
   },
 ];
 
 const metricTiles = [
-  ["15,323", "Daily signups", "+20.1%"],
-  ["73.2M", "May sales", "+11.4%"],
-  ["84%", "Retention", "+4.8%"],
-  ["92ms", "Latency", "-16.2%"],
+  ["4+", "Servicios core", "IA, Flutter, 3D, Web"],
+  ["100%", "Bilingüe", "ES + EN desde base"],
+  ["Premium", "Visual", "Blender + diseño"],
+  ["Smart", "Apps IA", "Flutter nativo"],
 ];
 
 const activityRows = [
-  ["North Cluster", "Operational", "99.8%"],
-  ["Creative Stack", "Rendering", "74.3%"],
-  ["Realtime Voice", "Standby", "41.5%"],
-  ["Web Surface", "Online", "100%"],
+  ["Apps Flutter IA", "Activo", "Listo"],
+  ["Blender 3D", "Rendering", "Premium"],
+  ["Web Moderna", "Online", "Rápida"],
+  ["Marca Digital", "Activo", "Completa"],
 ];
 
 const widgetDetails = {
-  daily: ["Daily Signups", "15,323 eventos activos"],
-  sales: ["Monthly Sales", "73.2M volumen proyectado"],
-  conversion: ["Growth Rate", "65% margen bruto"],
-  retention: ["Conversion", "37% conversion operativa"],
-  bars: ["Profit Summary", "14 segmentos analizados"],
-  map: ["Global Activity", "5 nodos sincronizados"],
-  radar: ["System Vector", "98.4 puntos de senal"],
+  daily: ["Proyectos Activos", "Apps IA + 3D en desarrollo"],
+  sales: ["Stack Técnico", "Flutter, Blender, IA, React"],
+  conversion: ["Crecimiento", "Marca inteligente y visual"],
+  retention: ["Conversión", "Presencia digital completa"],
+  bars: ["Servicios Core", "4 pilares creativos y técnicos"],
+  map: ["Alcance Global", "Contenido bilingüe ES/EN"],
+  radar: ["Sistema Creativo", "IA, Flutter, 3D y Web juntos"],
 };
 
 type WidgetId = keyof typeof widgetDetails;
@@ -356,12 +356,12 @@ export default function App() {
           <div className="viewport-frame">
             <div className="viewport-header">
               <div>
-                <span className="overline">{activeRail === "galeria" ? "Creative archive" : "Live interface"}</span>
-                <h1>{activeRail === "galeria" ? "Galeria holografica de renders" : "Superficie holografica de datos"}</h1>
+                <span className="overline">{activeRail === "galeria" ? "Portfolio creativo" : "Agencia creativa"}</span>
+                <h1>{activeRail === "galeria" ? "Proyectos Danwar Design" : "IA Engineer + Diseño digital"}</h1>
               </div>
               <div className="status-cluster">
-                <span><CircleDot size={15} /> {activeRail === "galeria" ? "Gallery mode" : "Online"}</span>
-                <span><Zap size={15} /> {activeRail === "galeria" ? "Projection sync" : "Low latency"}</span>
+                <span><CircleDot size={15} /> {activeRail === "galeria" ? "Modo portfolio" : "Activo"}</span>
+                <span><Zap size={15} /> {activeRail === "galeria" ? "Apps + 3D + Web" : "Stack completo"}</span>
               </div>
             </div>
 
@@ -391,8 +391,8 @@ export default function App() {
                     tabIndex={0}
                   >
                     <div className="widget-title">
-                      <span>Daily Signups</span>
-                      <small>Updated 3 min ago</small>
+                      <span>Proyectos Flutter</span>
+                      <small>Apps con IA integrada</small>
                     </div>
                     <TrendChart />
                   </article>
@@ -406,8 +406,8 @@ export default function App() {
                     tabIndex={0}
                   >
                     <div className="widget-title">
-                      <span>Monthly Sales</span>
-                      <small>May sales 73.2M</small>
+                      <span>Stack Técnico</span>
+                      <small>Flutter + Blender + IA</small>
                     </div>
                     <AreaChart />
                   </article>
@@ -421,7 +421,7 @@ export default function App() {
                     tabIndex={0}
                   >
                     <RingGauge value="234deg" label="65%" className="large" />
-                    <span>Gross profit margin</span>
+                    <span>Crecimiento marca</span>
                   </article>
 
                   <article
@@ -433,7 +433,7 @@ export default function App() {
                     tabIndex={0}
                   >
                     <RingGauge value="133deg" label="37%" />
-                    <span>Operating margin</span>
+                    <span>Presencia digital</span>
                   </article>
 
                   <article
@@ -445,8 +445,8 @@ export default function App() {
                     tabIndex={0}
                   >
                     <div className="widget-title">
-                      <span>Profit and loss summary</span>
-                      <small>Last 24 hours</small>
+                      <span>Servicios Core</span>
+                      <small>4 pilares creativos</small>
                     </div>
                     <MiniBars />
                   </article>
@@ -460,8 +460,8 @@ export default function App() {
                     tabIndex={0}
                   >
                     <div className="widget-title">
-                      <span>Global activity</span>
-                      <small>Nodes by product</small>
+                      <span>Alcance Global</span>
+                      <small>Bilingüe ES/EN</small>
                     </div>
                     <WorldMap />
                   </article>
@@ -475,7 +475,7 @@ export default function App() {
                     tabIndex={0}
                   >
                     <div className="widget-title">
-                      <span>System vector</span>
+                      <span>Sistema Creativo</span>
                     </div>
                     <RadarGraph />
                   </article>
@@ -494,21 +494,21 @@ export default function App() {
               <Activity size={22} />
               <div>
                 <strong>65%</strong>
-                <span>Growth rate</span>
+                <span>Creatividad</span>
               </div>
             </article>
             <article className="insight-card">
               <Gauge size={22} />
               <div>
                 <strong>37%</strong>
-                <span>Conversion</span>
+                <span>Técnica</span>
               </div>
             </article>
             <article className="insight-card">
               <Radar size={22} />
               <div>
                 <strong>98.4</strong>
-                <span>Signal score</span>
+                <span>Inteligencia</span>
               </div>
             </article>
           </aside>
@@ -529,8 +529,8 @@ export default function App() {
         <article className="lower-panel wide-panel">
           <div className="panel-heading">
             <div>
-              <span className="overline">Realtime</span>
-              <h2>Rendimiento por canales</h2>
+              <span className="overline">Servicios</span>
+              <h2>IA, Flutter, 3D y Web</h2>
             </div>
             <BarChart3 size={23} />
           </div>
@@ -540,8 +540,8 @@ export default function App() {
         <article className="lower-panel">
           <div className="panel-heading">
             <div>
-              <span className="overline">Modules</span>
-              <h2>Estado activo</h2>
+              <span className="overline">Stack</span>
+              <h2>Tecnologías activas</h2>
             </div>
             <Layers3 size={23} />
           </div>
@@ -559,15 +559,15 @@ export default function App() {
         <article className="lower-panel">
           <div className="panel-heading">
             <div>
-              <span className="overline">Creative stack</span>
-              <h2>Acciones</h2>
+              <span className="overline">Agencia</span>
+              <h2>Contacto</h2>
             </div>
             <Sparkles size={23} />
           </div>
           <div className="action-grid">
-            <button type="button"><MousePointer2 size={18} /> Explorar</button>
-            <button type="button"><Globe2 size={18} /> Publicar</button>
-            <button type="button"><Braces size={18} /> Integrar API</button>
+            <button type="button"><MousePointer2 size={18} /> Ver trabajo</button>
+            <button type="button"><Globe2 size={18} /> Servicios</button>
+            <button type="button"><Braces size={18} /> Escribir ahora</button>
           </div>
         </article>
       </section>
