@@ -20,6 +20,7 @@ import {
   Search,
   Settings2,
   Sparkles,
+  X,
   Zap,
 } from "lucide-react";
 import type { CSSProperties, KeyboardEvent, PointerEvent } from "react";
@@ -245,12 +246,21 @@ function RadarGraph() {
 
 function GalleryProjection() {
   const [activeImage, setActiveImage] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const item = galleryItems[activeImage];
   const nextIndex = (activeImage + 1) % galleryItems.length;
   const previousIndex = (activeImage - 1 + galleryItems.length) % galleryItems.length;
 
   function showImage(index: number) {
     setActiveImage(index);
+  }
+
+  function openModal() {
+    setIsModalOpen(true);
+  }
+
+  function closeModal() {
+    setIsModalOpen(false);
   }
 
   function showPrevious() {
@@ -262,15 +272,23 @@ function GalleryProjection() {
   }
 
   return (
-    <section className="gallery-projection" aria-label="Galeria holografica">
-      <div className="gallery-beam" />
+    <>
+      <section className="gallery-projection" aria-label="Galeria holografica">
+        <div className="gallery-beam" />
 
       <div className="gallery-stage" key={item.src}>
         <div className="gallery-ghost gallery-ghost-left">
           <img src={galleryItems[previousIndex].src} alt="" aria-hidden="true" />
         </div>
         <figure className="gallery-frame">
-          <img src={item.src} alt={item.alt} width="1920" height="1080" />
+          <img 
+            src={item.src} 
+            alt={item.alt} 
+            width="1920" 
+            height="1080" 
+            onClick={openModal}
+            style={{ cursor: 'pointer' }}
+          />
           <span className="gallery-scan" aria-hidden="true" />
           <figcaption className="gallery-caption">
             <span>{item.kicker}</span>
@@ -308,7 +326,21 @@ function GalleryProjection() {
           <ChevronRight size={22} />
         </button>
       </div>
-    </section>
+      </section>
+
+      {isModalOpen && (
+        <div className="image-modal" onClick={closeModal}>
+          <button className="modal-close" onClick={closeModal} aria-label="Cerrar">
+            <X size={32} />
+          </button>
+          <img 
+            src={item.src} 
+            alt={item.alt} 
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+    </>
   );
 }
 
