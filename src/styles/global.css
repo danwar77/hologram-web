@@ -831,7 +831,7 @@ p {
 
 .gallery-stage {
   position: relative;
-  min-height: 450px;
+  min-height: 350px;
   perspective: 1200px;
   animation: galleryStageIn 520ms cubic-bezier(0.18, 0.84, 0.22, 1);
 }
@@ -1001,24 +1001,47 @@ p {
 
 .gallery-thumbs {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px;
   min-width: 0;
+  max-height: 180px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Scrollbar styling for thumbs */
+.gallery-thumbs::-webkit-scrollbar {
+  width: 4px;
+}
+
+.gallery-thumbs::-webkit-scrollbar-track {
+  background: rgba(2, 18, 32, 0.4);
+  border-radius: 2px;
+}
+
+.gallery-thumbs::-webkit-scrollbar-thumb {
+  background: rgba(107, 226, 255, 0.4);
+  border-radius: 2px;
+}
+
+.gallery-thumbs::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 226, 255, 0.6);
 }
 
 .gallery-thumb {
-  display: grid;
-  grid-template-columns: 86px minmax(0, 1fr);
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   align-items: center;
-  min-height: 58px;
-  padding: 7px;
-  text-align: left;
+  min-height: 75px;
+  padding: 6px;
+  text-align: center;
 }
 
 .gallery-thumb img {
+  width: 100%;
   aspect-ratio: 16 / 9;
-  min-height: 44px;
+  min-height: 40px;
   border: 1px solid rgba(220, 250, 255, 0.22);
   filter: saturate(0.84) brightness(0.78);
 }
@@ -1026,11 +1049,12 @@ p {
 .gallery-thumb span {
   overflow: hidden;
   color: rgba(235, 251, 255, 0.9);
-  font-size: 0.72rem;
+  font-size: 0.65rem;
   font-weight: 900;
   text-overflow: ellipsis;
   text-transform: uppercase;
   white-space: nowrap;
+  width: 100%;
 }
 
 .floating-insights {
