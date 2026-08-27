@@ -809,7 +809,7 @@ p {
   inset: 8% 5% 7%;
   z-index: 8;
   display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-rows: 1fr auto;
   gap: 14px;
   transform: translateZ(62px);
 }
@@ -831,7 +831,7 @@ p {
 
 .gallery-stage {
   position: relative;
-  min-height: 0;
+  min-height: 450px;
   perspective: 1200px;
   animation: galleryStageIn 520ms cubic-bezier(0.18, 0.84, 0.22, 1);
 }
