@@ -31,12 +31,19 @@ const navItems = ["Servicios", "Proceso", "Trabajo", "Contacto"];
 const railItems = [
   { icon: Images, id: "galeria", label: "Portfolio" },
   { icon: LineChart, id: "metricas", label: "Proyectos" },
-  { icon: Network, id: "red", label: "Servicios" },
+  { icon: Network, id: "servicios", label: "Servicios" },
   { icon: Boxes, id: "recursos", label: "Stack" },
   { icon: Settings2, id: "ajustes", label: "Contacto" },
 ];
 
 const galleryItems = [
+  {
+    alt: "Diseño web e-commerce Artinatur con producto natural para articulaciones",
+    description: "Landing e-commerce para marca natural con narrativa premium, producto protagonista y llamadas a compra.",
+    kicker: "Web Commerce",
+    src: `${import.meta.env.BASE_URL}gallery/web_comerce.png`,
+    title: "Artinatur E-commerce",
+  },
   {
     alt: "App de lectura con IA para Flutter",
     description: "Aplicación móvil Flutter con inteligencia artificial para comprensión lectora y análisis.",
@@ -106,13 +113,6 @@ const galleryItems = [
     kicker: "Web Design",
     src: `${import.meta.env.BASE_URL}gallery/enomao2.jpg`,
     title: "Landing Optimizada",
-  },
-  {
-    alt: "Diseño web e-commerce Artinatur con producto natural para articulaciones",
-    description: "Landing e-commerce para marca natural con narrativa premium, producto protagonista y llamadas a compra.",
-    kicker: "Web Commerce",
-    src: `${import.meta.env.BASE_URL}gallery/web_comerce.png`,
-    title: "Artinatur E-commerce",
   },
   {
     alt: "Personaje 3D Knight Blender",
@@ -350,9 +350,169 @@ function GalleryProjection() {
   );
 }
 
+function ContactProjection() {
+  return (
+    <section className="contact-projection" aria-labelledby="contact-title">
+      <div className="contact-orbit" aria-hidden="true">
+        <div className="contact-orbit-ring ring-one" />
+        <div className="contact-orbit-ring ring-two" />
+        <Braces size={58} />
+      </div>
+      <div className="contact-copy">
+        <span className="overline">Canal directo</span>
+        <h2 id="contact-title">Contacto</h2>
+        <p>Cuéntame tu idea y construyamos una experiencia digital con carácter.</p>
+        <a className="contact-email" href="mailto:danwar77@gmail.com?subject=Contacto%20desde%20la%20web">
+          <span>Email</span>
+          <strong>danwar77@gmail.com</strong>
+        </a>
+        <a className="contact-compose" href="mailto:danwar77@gmail.com?subject=Contacto%20desde%20la%20web">
+          <Sparkles size={18} /> Escribir ahora
+        </a>
+      </div>
+    </section>
+  );
+}
+
+function ProcessProjection() {
+  const steps = [
+    ["01", "Escuchar", "Objetivos, audiencia y una dirección clara."],
+    ["02", "Diseñar", "Sistema visual, interacción y prototipo."],
+    ["03", "Construir", "Tecnología precisa y detalles con intención."],
+    ["04", "Lanzar", "Una experiencia lista para crecer."],
+  ];
+
+  return (
+    <section className="process-projection" aria-labelledby="process-title">
+      <div className="projection-heading">
+        <span className="overline">Método de trabajo</span>
+        <h2 id="process-title">Proceso</h2>
+        <p>Una ruta clara desde la primera conversación hasta la experiencia final.</p>
+      </div>
+      <ol className="process-steps">
+        {steps.map(([number, title, description]) => (
+          <li key={number}>
+            <span>{number}</span>
+            <div>
+              <strong>{title}</strong>
+              <p>{description}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+function WorkProjection({ onOpenGallery }: { onOpenGallery: () => void }) {
+  const areas = [
+    ["Apps IA", "Flutter, automatización y productos inteligentes."],
+    ["Web", "Interfaces rápidas, claras y con identidad."],
+    ["3D", "Modelado, renders y escenas cinematográficas."],
+  ];
+
+  return (
+    <section className="work-projection" aria-labelledby="work-title">
+      <div className="work-signal" aria-hidden="true"><Images size={62} /></div>
+      <div className="work-copy">
+        <span className="overline">Selección creativa</span>
+        <h2 id="work-title">Trabajo</h2>
+        <p>Experiencias digitales que combinan estrategia, tecnología y una presencia visual memorable.</p>
+        <div className="work-areas">
+          {areas.map(([title, description]) => (
+            <article key={title}>
+              <strong>{title}</strong>
+              <span>{description}</span>
+            </article>
+          ))}
+        </div>
+        <button className="work-gallery-link" onClick={onOpenGallery} type="button">
+          <Images size={18} /> Ver galería
+        </button>
+      </div>
+    </section>
+  );
+}
+
+function ServicesProjection() {
+  return (
+    <section className="services-projection" aria-labelledby="services-title">
+      <div className="projection-heading">
+        <span className="overline">Capacidades activas</span>
+        <h2 id="services-title">Servicios</h2>
+        <p>Una combinación de producto, tecnología y diseño visual para hacer que una idea avance.</p>
+      </div>
+      <div className="services-grid">
+        <article>
+          <Sparkles size={24} />
+          <strong>IA aplicada</strong>
+          <span>Asistentes, automatizaciones y experiencias inteligentes.</span>
+        </article>
+        <article>
+          <Zap size={24} />
+          <strong>Apps Flutter</strong>
+          <span>Productos móviles fluidos, rápidos y listos para escalar.</span>
+        </article>
+        <article>
+          <Globe2 size={24} />
+          <strong>Web moderna</strong>
+          <span>Interfaces con identidad, rendimiento y conversión.</span>
+        </article>
+        <article>
+          <Boxes size={24} />
+          <strong>3D y visuales</strong>
+          <span>Modelado, renders y dirección de arte que da presencia.</span>
+        </article>
+      </div>
+    </section>
+  );
+}
+
+function StackProjection() {
+  const stackGroups = [
+    ["Frontend", "React", "TypeScript", "Vite"],
+    ["Apps", "Flutter", "Dart", "Firebase"],
+    ["IA", "OpenAI", "Automatización", "APIs"],
+    ["3D", "Blender", "GLTF", "Three.js"],
+  ];
+
+  return (
+    <section className="stack-projection" aria-labelledby="stack-title">
+      <div className="stack-core" aria-hidden="true"><Layers3 size={68} /></div>
+      <div className="stack-copy">
+        <span className="overline">Herramientas conectadas</span>
+        <h2 id="stack-title">Stack</h2>
+        <p>Una arquitectura flexible para crear productos visuales, inteligentes y preparados para evolucionar.</p>
+        <div className="stack-groups">
+          {stackGroups.map(([area, ...tools]) => (
+            <article key={area}>
+              <strong>{area}</strong>
+              <div>{tools.map((tool) => <span key={tool}>{tool}</span>)}</div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function App() {
-  const [activeNav, setActiveNav] = useState(navItems[0]);
-  const [activeRail, setActiveRail] = useState(() => (window.location.hash === "#galeria" ? "galeria" : "metricas"));
+  const [activeNav, setActiveNav] = useState(() => {
+    if (window.location.hash === "#contacto") return "Contacto";
+    if (window.location.hash === "#proceso") return "Proceso";
+    if (window.location.hash === "#trabajo") return "Trabajo";
+    if (window.location.hash === "#servicios") return "Servicios";
+    return navItems[0];
+  });
+  const [activeRail, setActiveRail] = useState(() => {
+    if (window.location.hash === "#galeria") return "galeria";
+    if (window.location.hash === "#contacto") return "ajustes";
+    if (window.location.hash === "#proceso") return "proceso";
+    if (window.location.hash === "#trabajo") return "trabajo";
+    if (window.location.hash === "#servicios") return "servicios";
+    if (window.location.hash === "#stack") return "recursos";
+    return "metricas";
+  });
   const [activeWidget, setActiveWidget] = useState<WidgetId>("daily");
   const [paneStyle, setPaneStyle] = useState<CSSProperties>({
     "--tilt-x": "0deg",
@@ -399,8 +559,18 @@ export default function App() {
   function setRailMode(id: string) {
     setActiveRail(id);
 
-    if (id === "galeria") {
-      window.history.replaceState(null, "", "#galeria");
+    const modeHash = {
+      ajustes: "#contacto",
+      galeria: "#galeria",
+      proceso: "#proceso",
+      recursos: "#stack",
+      servicios: "#servicios",
+      trabajo: "#trabajo",
+    }[id];
+
+    if (modeHash) {
+      if (id === "ajustes") setActiveNav("Contacto");
+      window.history.replaceState(null, "", modeHash);
       return;
     }
 
@@ -426,7 +596,13 @@ export default function App() {
             <button
               className={activeNav === item ? "hud-tab active" : "hud-tab"}
               key={item}
-              onClick={() => setActiveNav(item)}
+              onClick={() => {
+                setActiveNav(item);
+                if (item === "Servicios") setRailMode("servicios");
+                if (item === "Contacto") setRailMode("ajustes");
+                if (item === "Proceso") setRailMode("proceso");
+                if (item === "Trabajo") setRailMode("trabajo");
+              }}
               type="button"
             >
               {item}
@@ -471,17 +647,21 @@ export default function App() {
           <div className="viewport-frame">
             <div className="viewport-header">
               <div>
-                <span className="overline">{activeRail === "galeria" ? "Portfolio creativo" : "Agencia creativa"}</span>
-                <h1>{activeRail === "galeria" ? "Proyectos Danwar77 Design" : "IA Engineer + Diseño digital"}</h1>
+                <span className="overline">
+                  {activeRail === "galeria" ? "Portfolio creativo" : activeRail === "ajustes" ? "Canal directo" : activeRail === "proceso" ? "Método Danwar77" : activeRail === "trabajo" ? "Selección creativa" : activeRail === "servicios" ? "Capacidades activas" : activeRail === "recursos" ? "Herramientas conectadas" : "Agencia creativa"}
+                </span>
+                <h1>
+                  {activeRail === "galeria" ? "Proyectos Danwar77 Design" : activeRail === "ajustes" ? "Hablemos de tu proyecto" : activeRail === "proceso" ? "De la idea al lanzamiento" : activeRail === "trabajo" ? "Proyectos que dejan huella" : activeRail === "servicios" ? "Tecnología con intención" : activeRail === "recursos" ? "Tecnología en sincronía" : "IA Engineer + Diseño digital"}
+                </h1>
               </div>
               <div className="status-cluster">
-                <span><CircleDot size={15} /> {activeRail === "galeria" ? "Modo portfolio" : "Activo"}</span>
-                <span><Zap size={15} /> {activeRail === "galeria" ? "Apps + 3D + Web" : "Stack completo"}</span>
+                <span><CircleDot size={15} /> {activeRail === "galeria" ? "Modo portfolio" : activeRail === "ajustes" ? "Disponible" : activeRail === "proceso" ? "4 etapas" : activeRail === "trabajo" ? "Portfolio activo" : activeRail === "servicios" ? "4 disciplinas" : activeRail === "recursos" ? "4 sistemas" : "Activo"}</span>
+                <span><Zap size={15} /> {activeRail === "galeria" ? "Apps + 3D + Web" : activeRail === "ajustes" ? "Respuesta directa" : activeRail === "proceso" ? "De idea a resultado" : activeRail === "trabajo" ? "Apps + 3D + Web" : activeRail === "servicios" ? "IA + Flutter + Web + 3D" : activeRail === "recursos" ? "Web + Apps + IA + 3D" : "Stack completo"}</span>
               </div>
             </div>
 
             <div
-              className={activeRail === "galeria" ? "hologram-pane gallery-mode" : "hologram-pane"}
+              className={activeRail === "galeria" ? "hologram-pane gallery-mode" : activeRail === "ajustes" ? "hologram-pane contact-mode" : activeRail === "proceso" ? "hologram-pane process-mode" : activeRail === "trabajo" ? "hologram-pane work-mode" : activeRail === "servicios" ? "hologram-pane services-mode" : activeRail === "recursos" ? "hologram-pane stack-mode" : "hologram-pane"}
               onPointerLeave={resetPaneTilt}
               onPointerMove={handlePanePointerMove}
               style={paneStyle}
@@ -495,6 +675,16 @@ export default function App() {
 
               {activeRail === "galeria" ? (
                 <GalleryProjection />
+              ) : activeRail === "ajustes" ? (
+                <ContactProjection />
+              ) : activeRail === "proceso" ? (
+                <ProcessProjection />
+              ) : activeRail === "trabajo" ? (
+                <WorkProjection onOpenGallery={() => setRailMode("galeria")} />
+              ) : activeRail === "servicios" ? (
+                <ServicesProjection />
+              ) : activeRail === "recursos" ? (
+                <StackProjection />
               ) : (
                 <>
                   <article
@@ -682,7 +872,14 @@ export default function App() {
           <div className="action-grid">
             <button type="button"><MousePointer2 size={18} /> Ver trabajo</button>
             <button type="button"><Globe2 size={18} /> Servicios</button>
-            <button type="button"><Braces size={18} /> Escribir ahora</button>
+            <button
+              type="button"
+              onClick={() => {
+                window.location.href = "mailto:danwar77@gmail.com?subject=Contacto%20desde%20la%20web";
+              }}
+            >
+              <Braces size={18} /> Escribir ahora
+            </button>
           </div>
         </article>
       </section>
