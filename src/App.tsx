@@ -20,60 +20,145 @@ import {
   Search,
   Settings2,
   Sparkles,
+  X,
   Zap,
 } from "lucide-react";
 import type { CSSProperties, KeyboardEvent, PointerEvent } from "react";
 import { useState } from "react";
 
-const navItems = ["Overview", "Analitica", "Sistemas", "Proyectos"];
+const navItems = ["Servicios", "Proceso", "Trabajo", "Contacto"];
 
 const railItems = [
-  { icon: Images, id: "galeria", label: "Galeria" },
-  { icon: LineChart, id: "metricas", label: "Metricas" },
-  { icon: Network, id: "red", label: "Red" },
-  { icon: Boxes, id: "recursos", label: "Recursos" },
-  { icon: Settings2, id: "ajustes", label: "Ajustes" },
+  { icon: Images, id: "galeria", label: "Portfolio" },
+  { icon: LineChart, id: "metricas", label: "Proyectos" },
+  { icon: Network, id: "red", label: "Servicios" },
+  { icon: Boxes, id: "recursos", label: "Stack" },
+  { icon: Settings2, id: "ajustes", label: "Contacto" },
 ];
 
 const galleryItems = [
   {
-    alt: "Render 3D de una escena de accion con explosion sobre un edificio",
-    description: "Composicion cinematica con fuego, azotea y profundidad nocturna.",
-    kicker: "Render 01",
-    src: "/gallery/die-hard-rooftop.png",
-    title: "Rooftop ignition",
+    alt: "App de lectura con IA para Flutter",
+    description: "Aplicación móvil Flutter con inteligencia artificial para comprensión lectora y análisis.",
+    kicker: "Flutter + IA",
+    src: `${import.meta.env.BASE_URL}gallery/appLectura.png`,
+    title: "App Lectura IA",
   },
   {
-    alt: "Render 3D de retrato de personaje inspirado en cientifico futurista",
-    description: "Retrato de personaje 3D con modelado facial y look de laboratorio.",
-    kicker: "Render 02",
-    src: "/gallery/doc-brown-portrait.png",
-    title: "Temporal portrait",
+    alt: "Interfaz de app de lectura Flutter",
+    description: "Diseño de interfaz moderna y funcional para apps educativas con IA integrada.",
+    kicker: "Flutter UI",
+    src: `${import.meta.env.BASE_URL}gallery/appLectura2.png`,
+    title: "UI App Educativa",
+  },
+  {
+    alt: "Render 3D Blender proyecto 1",
+    description: "Visualización 3D premium con Blender para marca y presentación de producto.",
+    kicker: "Blender 3D",
+    src: `${import.meta.env.BASE_URL}gallery/bj1.jpg`,
+    title: "Visual 3D Premium",
+  },
+  {
+    alt: "Escena 3D Blender composición",
+    description: "Composición cinematográfica 3D con iluminación profesional y materiales realistas.",
+    kicker: "Blender 3D",
+    src: `${import.meta.env.BASE_URL}gallery/bj2.png`,
+    title: "Escena 3D Cinematic",
+  },
+  {
+    alt: "Render 3D Blender producto",
+    description: "Modelado 3D de producto para e-commerce y presentaciones de marca.",
+    kicker: "Blender 3D",
+    src: `${import.meta.env.BASE_URL}gallery/bj3.jpg`,
+    title: "Producto 3D",
+  },
+  {
+    alt: "Visualización 3D con Blender para marca premium",
+    description: "Escenas y productos 3D diseñados para comunicar valor antes de leer una línea.",
+    kicker: "Blender 3D",
+    src: `${import.meta.env.BASE_URL}gallery/die-hard-rooftop.png`,
+    title: "Visual Premium 3D",
+  },
+  {
+    alt: "App Flutter con inteligencia artificial integrada",
+    description: "Aplicaciones móviles inteligentes con IA: asistentes, automatización y análisis.",
+    kicker: "Flutter + IA",
+    src: `${import.meta.env.BASE_URL}gallery/doc-brown-portrait.png`,
+    title: "Apps Inteligentes",
+  },
+  {
+    alt: "App de aprendizaje de inglés Flutter",
+    description: "Aplicación educativa Flutter con IA para aprendizaje personalizado de idiomas.",
+    kicker: "Flutter + IA",
+    src: `${import.meta.env.BASE_URL}gallery/english_app.png`,
+    title: "App English IA",
+  },
+  {
+    alt: "Proyecto web e-commerce Enomao",
+    description: "Sitio web moderno y rápido con diseño limpio para ventas online.",
+    kicker: "Web Moderna",
+    src: `${import.meta.env.BASE_URL}gallery/enomao.jpg`,
+    title: "E-commerce Web",
+  },
+  {
+    alt: "Landing page Enomao responsive",
+    description: "Landing page optimizada para conversión con diseño responsive y persuasivo.",
+    kicker: "Web Design",
+    src: `${import.meta.env.BASE_URL}gallery/enomao2.jpg`,
+    title: "Landing Optimizada",
+  },
+  {
+    alt: "Diseño web e-commerce Artinatur con producto natural para articulaciones",
+    description: "Landing e-commerce para marca natural con narrativa premium, producto protagonista y llamadas a compra.",
+    kicker: "Web Commerce",
+    src: `${import.meta.env.BASE_URL}gallery/web_comerce.png`,
+    title: "Artinatur E-commerce",
+  },
+  {
+    alt: "Personaje 3D Knight Blender",
+    description: "Modelado de personaje 3D con materiales PBR y rigging para animación.",
+    kicker: "Blender 3D",
+    src: `${import.meta.env.BASE_URL}gallery/knight.png`,
+    title: "Character 3D",
+  },
+  {
+    alt: "Retrato 3D Luke Blender",
+    description: "Retrato de personaje 3D con modelado facial detallado y texturizado realista.",
+    kicker: "Blender 3D",
+    src: `${import.meta.env.BASE_URL}gallery/luke.png`,
+    title: "Portrait 3D",
+  },
+  {
+    alt: "Personaje Rocky render 3D",
+    description: "Diseño de personaje 3D estilizado con materiales cartoon y presentación premium.",
+    kicker: "Blender 3D",
+    src: `${import.meta.env.BASE_URL}gallery/rocky.png`,
+    title: "Character Design",
   },
 ];
 
 const metricTiles = [
-  ["15,323", "Daily signups", "+20.1%"],
-  ["73.2M", "May sales", "+11.4%"],
-  ["84%", "Retention", "+4.8%"],
-  ["92ms", "Latency", "-16.2%"],
+  ["4+", "Servicios core", "IA, Flutter, 3D, Web"],
+  ["100%", "Bilingüe", "ES + EN desde base"],
+  ["Premium", "Visual", "Blender + diseño"],
+  ["Smart", "Apps IA", "Flutter nativo"],
 ];
 
 const activityRows = [
-  ["North Cluster", "Operational", "99.8%"],
-  ["Creative Stack", "Rendering", "74.3%"],
-  ["Realtime Voice", "Standby", "41.5%"],
-  ["Web Surface", "Online", "100%"],
+  ["Apps Flutter IA", "Activo", "Listo"],
+  ["Blender 3D", "Rendering", "Premium"],
+  ["Web Moderna", "Online", "Rápida"],
+  ["Marca Digital", "Activo", "Completa"],
 ];
 
 const widgetDetails = {
-  daily: ["Daily Signups", "15,323 eventos activos"],
-  sales: ["Monthly Sales", "73.2M volumen proyectado"],
-  conversion: ["Growth Rate", "65% margen bruto"],
-  retention: ["Conversion", "37% conversion operativa"],
-  bars: ["Profit Summary", "14 segmentos analizados"],
-  map: ["Global Activity", "5 nodos sincronizados"],
-  radar: ["System Vector", "98.4 puntos de senal"],
+  daily: ["Proyectos Activos", "Apps IA + 3D en desarrollo"],
+  sales: ["Stack Técnico", "Flutter, Blender, IA, React"],
+  conversion: ["Crecimiento", "Marca inteligente y visual"],
+  retention: ["Conversión", "Presencia digital completa"],
+  bars: ["Servicios Core", "4 pilares creativos y técnicos"],
+  map: ["Alcance Global", "Contenido bilingüe ES/EN"],
+  radar: ["Sistema Creativo", "IA, Flutter, 3D y Web juntos"],
 };
 
 type WidgetId = keyof typeof widgetDetails;
@@ -168,12 +253,21 @@ function RadarGraph() {
 
 function GalleryProjection() {
   const [activeImage, setActiveImage] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const item = galleryItems[activeImage];
   const nextIndex = (activeImage + 1) % galleryItems.length;
   const previousIndex = (activeImage - 1 + galleryItems.length) % galleryItems.length;
 
   function showImage(index: number) {
     setActiveImage(index);
+  }
+
+  function openModal() {
+    setIsModalOpen(true);
+  }
+
+  function closeModal() {
+    setIsModalOpen(false);
   }
 
   function showPrevious() {
@@ -185,15 +279,22 @@ function GalleryProjection() {
   }
 
   return (
-    <section className="gallery-projection" aria-label="Galeria holografica">
-      <div className="gallery-beam" />
+    <>
+      <section className="gallery-projection" aria-label="Galeria holografica">
+        <div className="gallery-beam" />
 
       <div className="gallery-stage" key={item.src}>
         <div className="gallery-ghost gallery-ghost-left">
           <img src={galleryItems[previousIndex].src} alt="" aria-hidden="true" />
         </div>
         <figure className="gallery-frame">
-          <img src={item.src} alt={item.alt} width="1920" height="1080" />
+          <img 
+            src={item.src} 
+            alt={item.alt} 
+            width="1920" 
+            height="1080" 
+            onClick={openModal}
+          />
           <span className="gallery-scan" aria-hidden="true" />
           <figcaption className="gallery-caption">
             <span>{item.kicker}</span>
@@ -231,7 +332,21 @@ function GalleryProjection() {
           <ChevronRight size={22} />
         </button>
       </div>
-    </section>
+      </section>
+
+      {isModalOpen && (
+        <div className="image-modal" onClick={closeModal}>
+          <button className="modal-close" onClick={closeModal} aria-label="Cerrar">
+            <X size={32} />
+          </button>
+          <img 
+            src={item.src} 
+            alt={item.alt} 
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+    </>
   );
 }
 
@@ -356,12 +471,12 @@ export default function App() {
           <div className="viewport-frame">
             <div className="viewport-header">
               <div>
-                <span className="overline">{activeRail === "galeria" ? "Creative archive" : "Live interface"}</span>
-                <h1>{activeRail === "galeria" ? "Galeria holografica de renders" : "Superficie holografica de datos"}</h1>
+                <span className="overline">{activeRail === "galeria" ? "Portfolio creativo" : "Agencia creativa"}</span>
+                <h1>{activeRail === "galeria" ? "Proyectos Danwar77 Design" : "IA Engineer + Diseño digital"}</h1>
               </div>
               <div className="status-cluster">
-                <span><CircleDot size={15} /> {activeRail === "galeria" ? "Gallery mode" : "Online"}</span>
-                <span><Zap size={15} /> {activeRail === "galeria" ? "Projection sync" : "Low latency"}</span>
+                <span><CircleDot size={15} /> {activeRail === "galeria" ? "Modo portfolio" : "Activo"}</span>
+                <span><Zap size={15} /> {activeRail === "galeria" ? "Apps + 3D + Web" : "Stack completo"}</span>
               </div>
             </div>
 
@@ -391,8 +506,8 @@ export default function App() {
                     tabIndex={0}
                   >
                     <div className="widget-title">
-                      <span>Daily Signups</span>
-                      <small>Updated 3 min ago</small>
+                      <span>Proyectos Flutter</span>
+                      <small>Apps con IA integrada</small>
                     </div>
                     <TrendChart />
                   </article>
@@ -406,8 +521,8 @@ export default function App() {
                     tabIndex={0}
                   >
                     <div className="widget-title">
-                      <span>Monthly Sales</span>
-                      <small>May sales 73.2M</small>
+                      <span>Stack Técnico</span>
+                      <small>Flutter + Blender + IA</small>
                     </div>
                     <AreaChart />
                   </article>
@@ -421,7 +536,7 @@ export default function App() {
                     tabIndex={0}
                   >
                     <RingGauge value="234deg" label="65%" className="large" />
-                    <span>Gross profit margin</span>
+                    <span>Crecimiento marca</span>
                   </article>
 
                   <article
@@ -433,7 +548,7 @@ export default function App() {
                     tabIndex={0}
                   >
                     <RingGauge value="133deg" label="37%" />
-                    <span>Operating margin</span>
+                    <span>Presencia digital</span>
                   </article>
 
                   <article
@@ -445,8 +560,8 @@ export default function App() {
                     tabIndex={0}
                   >
                     <div className="widget-title">
-                      <span>Profit and loss summary</span>
-                      <small>Last 24 hours</small>
+                      <span>Servicios Core</span>
+                      <small>4 pilares creativos</small>
                     </div>
                     <MiniBars />
                   </article>
@@ -460,8 +575,8 @@ export default function App() {
                     tabIndex={0}
                   >
                     <div className="widget-title">
-                      <span>Global activity</span>
-                      <small>Nodes by product</small>
+                      <span>Alcance Global</span>
+                      <small>Bilingüe ES/EN</small>
                     </div>
                     <WorldMap />
                   </article>
@@ -475,7 +590,7 @@ export default function App() {
                     tabIndex={0}
                   >
                     <div className="widget-title">
-                      <span>System vector</span>
+                      <span>Sistema Creativo</span>
                     </div>
                     <RadarGraph />
                   </article>
@@ -494,21 +609,21 @@ export default function App() {
               <Activity size={22} />
               <div>
                 <strong>65%</strong>
-                <span>Growth rate</span>
+                <span>Creatividad</span>
               </div>
             </article>
             <article className="insight-card">
               <Gauge size={22} />
               <div>
                 <strong>37%</strong>
-                <span>Conversion</span>
+                <span>Técnica</span>
               </div>
             </article>
             <article className="insight-card">
               <Radar size={22} />
               <div>
                 <strong>98.4</strong>
-                <span>Signal score</span>
+                <span>Inteligencia</span>
               </div>
             </article>
           </aside>
@@ -529,8 +644,8 @@ export default function App() {
         <article className="lower-panel wide-panel">
           <div className="panel-heading">
             <div>
-              <span className="overline">Realtime</span>
-              <h2>Rendimiento por canales</h2>
+              <span className="overline">Servicios</span>
+              <h2>IA, Flutter, 3D y Web</h2>
             </div>
             <BarChart3 size={23} />
           </div>
@@ -540,8 +655,8 @@ export default function App() {
         <article className="lower-panel">
           <div className="panel-heading">
             <div>
-              <span className="overline">Modules</span>
-              <h2>Estado activo</h2>
+              <span className="overline">Stack</span>
+              <h2>Tecnologías activas</h2>
             </div>
             <Layers3 size={23} />
           </div>
@@ -559,15 +674,15 @@ export default function App() {
         <article className="lower-panel">
           <div className="panel-heading">
             <div>
-              <span className="overline">Creative stack</span>
-              <h2>Acciones</h2>
+              <span className="overline">Agencia</span>
+              <h2>Contacto</h2>
             </div>
             <Sparkles size={23} />
           </div>
           <div className="action-grid">
-            <button type="button"><MousePointer2 size={18} /> Explorar</button>
-            <button type="button"><Globe2 size={18} /> Publicar</button>
-            <button type="button"><Braces size={18} /> Integrar API</button>
+            <button type="button"><MousePointer2 size={18} /> Ver trabajo</button>
+            <button type="button"><Globe2 size={18} /> Servicios</button>
+            <button type="button"><Braces size={18} /> Escribir ahora</button>
           </div>
         </article>
       </section>
